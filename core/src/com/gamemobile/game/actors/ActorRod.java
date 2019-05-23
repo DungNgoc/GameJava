@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.animations.AnimationCustom;
+
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.TextConstants;
@@ -24,7 +25,7 @@ public class ActorRod extends Actor {
         TNTBOX_BREAK,
         DOGBONE_5,
         SKULL_3
-        //  MOUSERUNNING
+      //  MOUSERUNNING
 
     }
 
@@ -68,10 +69,10 @@ public class ActorRod extends Actor {
         sprite.setSize(getWidth(), getHeight());
 
         scaleBound();
-        // setScaleNumBoom();
+       // setScaleNumBoom();
         ischeckboom = false;
-        // mouse = new AnimationCustom("animations/mouses/mouserunning.atlas", 7,
-        //      x, y, width, height);
+       // mouse = new AnimationCustom("animations/mouses/mouserunning.atlas", 7,
+          //      x, y, width, height);
 
         rodExplosionAnimation = new AnimationCustom("animations/explosions/rodexplosion.atlas", 6, x, y, width, height);
         explosionPos = new float[4];
@@ -178,9 +179,9 @@ public class ActorRod extends Actor {
             } else if(this.money >=350 && this.money < 400){
                 this.money = 0;
 
-            }
+            } else;
 
-            // this.money = 0;
+           // this.money = 0;
 
         }
         if(tag.equals(RodTag.TNTBOX)){
@@ -198,7 +199,7 @@ public class ActorRod extends Actor {
 
 
             //setScaleNumBoom();
-            //  setScaleNumBoom();
+          //  setScaleNumBoom();
         }
     }
 
@@ -244,9 +245,9 @@ public class ActorRod extends Actor {
 
                 }
                 else{
-                    rodState = RodState.CATCHED;
+                rodState = RodState.CATCHED;
 
-                    return;}
+                return;}
             }
 
 
@@ -258,13 +259,13 @@ public class ActorRod extends Actor {
             PlayerInfo.setCurrentMoney(PlayerInfo.getCurrentMoney() + money);
 
 
-            //  if  (this.money==0){
+          //  if  (this.money==0){
             //    PlayerInfo.getBag().setSodaPower(ShopConstants.SODA_POWER);
-            //     talkingText.setText("YOU GOT POWERFUL");
+           //     talkingText.setText("YOU GOT POWERFUL");
             if(this.money == 0) {
 
-                talkingText.setText("YOU GOT A BOOM");
-                PlayerInfo.setCurrentBombNum(PlayerInfo.getCurrentBombNum() + 1);
+                    talkingText.setText("YOU GOT A BOOM");
+                    PlayerInfo.setCurrentBombNum(PlayerInfo.getCurrentBombNum() + 1);
 
             }else
                 talkingText.setText("Oh yeah!$" + money + "...");
@@ -276,7 +277,7 @@ public class ActorRod extends Actor {
             return;
         }
     }
-    // private float scaleNumBoom = 2;
+   // private float scaleNumBoom = 2;
     public void updateCollisionWithBomb(ActorPod acPod, ActorBomb acBomb){
 
         acBomb.updateCollisionWithPod(acPod);
@@ -289,7 +290,7 @@ public class ActorRod extends Actor {
         }
     }
 
-    //  public void checkCollisionTntBox(){
+  //  public void checkCollisionTntBox(){
 
     //       |O|
     // pod_A------pod_B
@@ -445,7 +446,7 @@ public class ActorRod extends Actor {
     @Override
     public void act(float delta) {
         if (rodState.equals(RodState.CATCHED)) {
-            moveRod();
+           moveRod();
         }
     }
 

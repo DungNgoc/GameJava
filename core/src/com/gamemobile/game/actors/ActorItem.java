@@ -3,6 +3,7 @@ package com.gamemobile.game.actors;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ShopConstants;
 import com.gamemobile.game.utils.TextNoBackground;

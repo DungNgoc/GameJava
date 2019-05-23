@@ -4,7 +4,6 @@ import com.gamemobile.game.actors.ActorItem;
 
 
 
-
 public class ShopConstants {
 
     public static final long TIME_BONUS = 20;
@@ -24,7 +23,7 @@ public class ShopConstants {
     public static void resetListItem(){
         for (int i = 0; i < LIST_ITEMS.length; i++){
             LIST_ITEMS[i].setEnable(true);
-          //  LIST_ITEMS[i].getSoundBuy().setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+
         }
     }
 

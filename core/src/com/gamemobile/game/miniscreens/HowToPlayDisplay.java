@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
+
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.SplashDoors;
 
@@ -31,16 +32,16 @@ public class HowToPlayDisplay  extends Actor {
         miniScreenState = MiniScreenState.HIDE;
         boardState = BoardState.MOVE_DOWN;
         boardDirectionY = Application.DESKTOP_HEIGHT;
-        startTime = TimeUtils.millis() / 1000;
-        // soundStartPlay = new MusicEffect("sounds/startplay.ogg");
-        // soundStartPlay.setMusicKind(MusicEffect.MusicKind.ONE_TIME);
-        //  soundStartPlay.playMusic();
-        //  FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/luximb.ttf"));
-        //  FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        //  parameter.size = 40;
-        // font = generator.generateFont(parameter); // font size 12 pixels
-        // generator.dispose(); // don't forget to dispose to avoid memory leaks!
-        //  font.setColor(Color.BROWN);
+       startTime = TimeUtils.millis() / 1000;
+       // soundStartPlay = new MusicEffect("sounds/startplay.ogg");
+      // soundStartPlay.setMusicKind(MusicEffect.MusicKind.ONE_TIME);
+     //  soundStartPlay.playMusic();
+      //  FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/luximb.ttf"));
+      //  FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+      //  parameter.size = 40;
+      // font = generator.generateFont(parameter); // font size 12 pixels
+     // generator.dispose(); // don't forget to dispose to avoid memory leaks!
+     //  font.setColor(Color.BROWN);
         isResume = false;
         ischeckbtn = false;
     }
@@ -54,7 +55,7 @@ public class HowToPlayDisplay  extends Actor {
     }
 
     public void showDisplay(){
-        // isResume = false;
+       // isResume = false;
         miniScreenState = MiniScreenState.SHOW;
     }
     public void setMiniScreenState(MiniScreenState miniScreenState) {

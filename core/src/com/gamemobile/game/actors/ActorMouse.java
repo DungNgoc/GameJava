@@ -49,7 +49,7 @@ public class ActorMouse extends Actor {
     private float xRightStop, xLeftStop;
     //private float rotation;
 
-    public ActorMouse(String pathFileLeft, String pathFileRight, float x, float y, float width, float height, RodTag tag, float xLeftStop, float xRightStop) {
+    public ActorMouse(String pathFileLeft,String pathFileRight, float x, float y, float width, float height, RodTag tag, float xLeftStop, float xRightStop) {
 
         this.tag = tag;
 
@@ -84,7 +84,6 @@ public class ActorMouse extends Actor {
 
         rodExplosionAnimation = new AnimationCustom("animations/explosions/rodexplosion.atlas", 6, x, y, width, height);
         explosionPos = new float[4];
-
 
 
     }

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.gamemobile.game.Application;
 
 
-
 public class SplashDoors {
     private static Texture splashDoorLeft = new Texture("images/backgrounds/splashdoor.png");
     private static Texture splashDoorRight = new Texture("images/backgrounds/splashdoor.png");

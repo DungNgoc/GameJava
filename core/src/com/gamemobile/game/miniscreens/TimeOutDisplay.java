@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
+
 import com.gamemobile.game.utils.SplashDoors;
 import com.gamemobile.game.utils.TextNoBackground;
 
@@ -60,6 +61,7 @@ public class TimeOutDisplay extends Actor {
             }
         }
         if(miniScreenState.equals(MiniScreenState.FREEZE)){
+
             SplashDoors.closeTheSplashDoor(10f);
             if(SplashDoors.checkDoorClose() && TimeUtils.millis()/1000 - startTime >= 2){
                 miniScreenState = MiniScreenState.FINISH;

@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
+
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.SplashDoors;
 
@@ -35,9 +36,9 @@ public class ExitDisplay extends  Actor {
         boardState = BoardState.MOVE_DOWN;
         boardDirectionY = Application.DESKTOP_HEIGHT;
         startTime = TimeUtils.millis() / 1000;
-        //  soundStartPlay = new MusicEffect("sounds/startplay.ogg");
-        //  soundStartPlay.setMusicKind(MusicEffect.MusicKind.ONE_TIME);
-        //   soundStartPlay.playMusic();
+      //  soundStartPlay = new MusicEffect("sounds/startplay.ogg");
+      //  soundStartPlay.setMusicKind(MusicEffect.MusicKind.ONE_TIME);
+     //   soundStartPlay.playMusic();
         //  FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/luximb.ttf"));
         //  FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         //  parameter.size = 40;
@@ -109,7 +110,7 @@ public class ExitDisplay extends  Actor {
                 moveUpBoard();
 
                 if (btnNo.isTouched()) {
-                    btnNo.setButtonState(ActorButton.ButtonState.HIDE);
+                    btnNo   .setButtonState(ActorButton.ButtonState.HIDE);
                     boardState = BoardState.MOVE_UP;
                     ischeckbtn = true;
                 }

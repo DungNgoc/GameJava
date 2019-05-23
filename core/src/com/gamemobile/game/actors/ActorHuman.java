@@ -6,7 +6,6 @@ import com.gamemobile.game.animations.AnimationCustom;
 import com.gamemobile.game.utils.ScreenConstants;
 
 
-
 /**
  * display human and change human's animation.
  */

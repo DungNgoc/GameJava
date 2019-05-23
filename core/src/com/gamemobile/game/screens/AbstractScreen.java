@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.gamemobile.game.Application;
 
+
 public abstract class AbstractScreen implements Screen {
 
     public enum ScreenState{
@@ -71,4 +72,5 @@ public abstract class AbstractScreen implements Screen {
         stageGame.dispose();
 
     }
+
 }

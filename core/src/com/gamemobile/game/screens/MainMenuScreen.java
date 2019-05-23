@@ -12,6 +12,7 @@ import com.gamemobile.game.actors.ActorImage;
 import com.gamemobile.game.miniscreens.ExitDisplay;
 import com.gamemobile.game.miniscreens.HowToPlayDisplay;
 import com.gamemobile.game.miniscreens.SettingDisplay;
+
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.SplashDoors;
 
@@ -51,6 +52,9 @@ public class MainMenuScreen extends AbstractScreen {
         app.shapeBatch.setProjectionMatrix(getCamera().combined);
         background = new Texture("images/backgrounds/mainmenu.png");
         panel = new Texture("images/textureobjects/panel.png");
+
+
+        isCloseDoor = false;
 
 
 
@@ -107,7 +111,7 @@ public class MainMenuScreen extends AbstractScreen {
 
         if(getScreenState().equals(ScreenState.PAUSE)){
             btnHowToPlay.updateButtonTouched();
-            if(howToPlayDisplay.ischeckbtn == true) {
+           if(howToPlayDisplay.ischeckbtn == true) {
                 setScreenState(ScreenState.PLAY);
 
             }
@@ -174,21 +178,20 @@ public class MainMenuScreen extends AbstractScreen {
 //            acHumanImage = new ActorImage("images/textureobjects/humanbarrow.png", 170f, 30f, 170.0F, 200.0F);
             acHumanImage.setMoveRight(0.5F, 400f);
         }
-        else {
-            //    acHumanImage = new ActorImage("images/textureobjects/humanbarrowright.png", 170f, 30f, 170.0F, 200.0F);
-            acHumanImage.setMoveLeft(0.5F, 400f);
-        }// acHumanImage.setRotationWave(0.2F, 4.0F);
+       else {
+        //    acHumanImage = new ActorImage("images/textureobjects/humanbarrowright.png", 170f, 30f, 170.0F, 200.0F);
+           acHumanImage.setMoveLeft(0.5F, 400f);
+       }// acHumanImage.setRotationWave(0.2F, 4.0F);
         // acHumanImage.setNonRotation();
     }
 
     @Override
-    public void pause() {
-       // musicMenu.pausePlay();
+    public void pause(){
     }
 
     @Override
     public void resume() {
-     //   musicMenu.resumePlay();
+
     }
 
     @Override

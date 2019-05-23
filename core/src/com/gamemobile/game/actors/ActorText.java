@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.TextConstants;
 
@@ -45,7 +46,7 @@ public class ActorText extends Actor {
 
     private String text;
 
-  //  private SoundEffect soundText;
+
 
     public ActorText(String text, Color color, int size){
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/luximb.ttf"));
@@ -86,8 +87,7 @@ public class ActorText extends Actor {
             colorText = Color.BROWN;
             text = "" + PlayerInfo.getCurrentTimePlay();
             textState = TextState.FREEZE;
-          //  soundText = new SoundEffect("sounds/timecount.ogg");
-         //   soundText.setSoundKind(SoundEffect.SoundKind.DURING);
+
             return;
         }
         if(textTag.equals(TextTag.TARGET)){
@@ -102,8 +102,7 @@ public class ActorText extends Actor {
             colorText = Color.BROWN;
             text = "" + PlayerInfo.getCurrentTarget();
             textState = TextState.FREEZE;
-           // soundText = new SoundEffect("sounds/target.wav");
-           // soundText.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+
             return;
         }
         if(textTag.equals(TextTag.MONEY)){
@@ -177,10 +176,6 @@ public class ActorText extends Actor {
     public void setTextState(TextState textState) {
         this.textState = textState;
     }
-
-   // public SoundEffect getSoundText() {
-    //    return soundText;
-    //}
 
     @Override
     public boolean remove() {

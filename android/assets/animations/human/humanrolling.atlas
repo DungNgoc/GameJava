@@ -6,28 +6,28 @@ repeat: none
 human0
   rotate: false
   xy: 1, 1
-  size: 98, 71
-  orig: 98, 71
+  size: 175, 175
+  orig: 98, 98
   offset: 0, 0
   index: -1
 human1
   rotate: false
-  xy: 101, 1
-  size: 98, 71
-  orig: 98, 71
+  xy: 175, 1
+  size: 175, 175
+  orig: 98, 98
   offset: 0, 0
   index: -1
 human2
   rotate: false
-  xy: 201, 1
-  size: 98, 71
-  orig: 98, 71
+  xy: 350, 1
+  size: 175, 175
+  orig: 98, 98
   offset: 0, 0
   index: -1
 human3
   rotate: false
-  xy: 301, 1
-  size: 98, 71
-  orig: 98, 71
+  xy: 525, 1
+  size: 175, 175
+  orig: 98, 98
   offset: 0, 0
   index: -1

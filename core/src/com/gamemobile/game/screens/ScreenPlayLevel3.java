@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ScreenPlayLevel1 extends AbstractScreen{
+public class ScreenPlayLevel3 extends AbstractScreen {
 
     private ActorHuman acHuman;
     private ArrayList<ActorRod> lstAcRod;
@@ -42,16 +42,20 @@ public class ScreenPlayLevel1 extends AbstractScreen{
     private SettingDisplay settingDisplay;
     private ActorButton settingButton;
     private TimeOutDisplay timeOutDisplay;
-   // private float rotation;
+    // private float rotation;
 
- //   private ActorMouse actorMouse;// actor mouse
+    //   private ActorMouse actorMouse;// actor mouse
 
-    public ScreenPlayLevel1(Application app) {
+    public ScreenPlayLevel3(Application app) {
         super(app);
     }
 
     @Override
     public void update(float delta) {
+        //   makeHumanRun();
+        //makeHumanRun();
+        //if( actorMouse.moveRange == 0)
+        // actorMouse.setMoveRight(0.5f, Application.DESKTOP_WIDTH);
     }
 
     @Override
@@ -80,24 +84,27 @@ public class ScreenPlayLevel1 extends AbstractScreen{
         settingButton = new ActorButton(100f, 100f, ActorButton.ButtonTag.SETTING);
 
 
-        this.lstAcRod.add(new ActorRod(700.0F, 200.0F, 70.0F, 60.0F, ActorRod.RodTag.ROCK_20));
-        this.lstAcRod.add(new ActorRod(500.0F, 200.0F, 70.0F, 60.0F, ActorRod.RodTag.ROCK_20));
-        this.lstAcRod.add(new ActorRod(400.0F, 150.0F, 70.0F, 60.0F, ActorRod.RodTag.ROCK_20));
-        this.lstAcRod.add(new ActorRod(300.0F, 50.0F, 70.0F, 60.0F, ActorRod.RodTag.ROCK_20));
-        this.lstAcRod.add(new ActorRod(650.0F, 90.0F, 70.0F, 60.0F, ActorRod.RodTag.ROCK_20));
-        this.lstAcRod.add(new ActorRod(100.0F, 120.0F, 70.0F, 60.0F, ActorRod.RodTag.ROCK_20));
-        this.lstAcRod.add(new ActorRod(750.0F, 100.0F, 60.0F, 60.0F, ActorRod.RodTag.ROCK_10));
-        this.lstAcRod.add(new ActorRod(200.0F, 100.0F, 100.0F, 100.0F, ActorRod.RodTag.GOLD_500));
-        this.lstAcRod.add(new ActorRod(90.0F, 50.0F, 60.0F, 60.0F, ActorRod.RodTag.GOLD_100));
-        this.lstAcRod.add(new ActorRod(600.0F, 100.0F, 80.0F, 80.0F, ActorRod.RodTag.GOLD_250));
-      //  this.lstAcRod.add(new ActorRod(700.0F, 300.0F, 40.0F, 30.0F, ActorRod.RodTag.DINAMOND_650));
-        this.lstAcRod.add(new ActorRod(10.0F, 300.0F, 80.0F, 80.0F, ActorRod.RodTag.GOLD_250));
-        this.lstAcRod.add(new ActorRod(10.0F, 200.0F, 100.0F, 100.0F, ActorRod.RodTag.GOLD_500));
-        //this.lstAcRod.add(new ActorRod(650.0F, 200.0F, 50.0F, 50.0F, ActorRod.RodTag.QUESTIONBAGTYPE1));
-        //this.lstAcRod.add(new ActorRod(600.0F, 200.0F, 80.0F, 80.0F, ActorRod.RodTag.MOUSERUNNING));
-        // lstAcRod.add(new ActorRod(290f, 130f, 60f, 60f, ActorRod.RodTag.GOLD_100));
-        //lstAcRod.add(new ActorRod(330f, 20f, 60f, 60f, ActorRod.RodTag.GOLD_100));
-        //lstAcRod.add(new ActorRod(340f, 250f, 60f, 60f, ActorRod.RodTag.QUESTIONBAGTYPE1));
+        lstAcRod.add(new ActorRod(200f, 50f, 120f, 120f, ActorRod.RodTag.GOLD_500));
+
+        lstAcRod.add(new ActorRod(170f, 330f, 80f, 70f, ActorRod.RodTag.GOLD_250));
+        lstAcRod.add(new ActorRod(180f, 250f, 60f, 60f, ActorRod.RodTag.QUESTIONBAGTYPE1));
+        lstAcRod.add(new ActorRod(600f, 200f, 70f, 60f,ActorRod.RodTag.DINAMOND_650));
+
+        lstAcRod.add(new ActorRod(150f, 170f, 70f, 60f, ActorRod.RodTag.ROCK_20));
+        lstAcRod.add(new ActorRod(530f, 230f, 70f, 60f, ActorRod.RodTag.ROCK_20));
+        lstAcRod.add(new ActorRod(650f, 200f, 70f, 60f, ActorRod.RodTag.ROCK_20));
+        lstAcRod.add(new ActorRod(670f, 280f, 70f, 60f, ActorRod.RodTag.ROCK_20));
+        lstAcRod.add(new ActorRod(580f, 150f, 70f, 60f, ActorRod.RodTag.ROCK_20));
+
+        lstAcRod.add(new ActorRod(220f, 280f, 60f, 60f, ActorRod.RodTag.ROCK_10));
+        lstAcRod.add(new ActorRod(600f, 260f, 60f, 60f, ActorRod.RodTag.ROCK_10));
+
+        //lstAcRod.add(new ActorRod(300f, 300f, 60f, 60f, ActorRod.RodTag.TNTBOX));
+
+        //  lstAcMouse.add(new ActorMouse("animations/mouses/mouserunning.atlas","animations/mouses/mouse1/mouserunningright/mouserunningright.atlas",560f, 250f, 55f, 55f, ActorMouse.RodTag.MOUSERUNNING1, 170f, 700f));
+        // lstAcMouse.add(new ActorMouse("animations/mouses/mouse2/mouserunningleft.atlas","animations/mouses/mouse2/mouserunningright.atlas", 400f, 200f, 70f, 70f, ActorMouse.RodTag.MOUSERUNNING2, 150f, 500f  ));
+
+        //lstAcRod.add(new ActorRod( 600f, 200f, 80f, 80f, ActorRod.RodTag.MOUSERUNNING));
 
         GameMethods.createPlayScreenActorText(getStageGame(), lstAcRod, lstAcMouse, lstAcText);
 
@@ -115,7 +122,7 @@ public class ScreenPlayLevel1 extends AbstractScreen{
                 getStageGame().addActor(actor);
         }
 
-      //  getStageGame().addActor(actorMouse);
+        //  getStageGame().addActor(actorMouse);
         //  getStageGame().addActor(actorMouse.getAcBomb());
         //getStageGame().addActor(actorMouse.getAcPod());
 
@@ -144,18 +151,17 @@ public class ScreenPlayLevel1 extends AbstractScreen{
         setScreenState(ScreenState.PAUSE);
     }
 
-    private void makeMouseRun(){
+   /* private void makeMouseRun(){
 
 
-        for(ActorMouse actor :lstAcMouse){
-            if(actor != null)
-                if(actor.isCheck==false){
-                actor.setMoveLeft(0.65f, 1000);
-                }
-                else actor.setMoveRight(0.65f, 1000);
-        }
+        if(lstAcMouse.get(0).isCheck == false)
+             lstAcMouse.get(0).setMoveLeft(0.5f, 400);
+         else lstAcMouse.get(0).setMoveRight(0.5f, 400);
+        if(lstAcMouse.get(1).isCheck == false)
+          lstAcMouse.get(1).setMoveLeft(0.5f, 400);
+      else lstAcMouse.get(1).setMoveRight(0.5f, 400);
 
-    }
+    }*/
 
     @Override
     public void render(float delta) {
@@ -205,9 +211,9 @@ public class ScreenPlayLevel1 extends AbstractScreen{
         if(getScreenState().equals(ScreenState.PLAY)) {
 
             getStageGame().act();
-            makeMouseRun();// let mouse move
+            // makeMouseRun();// let mouse move
             getStageGame().draw();
-           if (!GameMethods.checkTimePlay(lstAcText, startTime)
+            if (!GameMethods.checkTimePlay(lstAcText, startTime)
                     || GameMethods.isCatchedAllRod(lstAcRod) ){//|| GameMethods.isCatchedAllRod1(lstAcMouse)) {
                 if(timeOutDisplay.getMiniScreenState().equals(MiniScreenState.HIDE)){
                     timeOutDisplay.showDisplay();
@@ -215,6 +221,7 @@ public class ScreenPlayLevel1 extends AbstractScreen{
                 }
             }
 
+            //makeHumanRun1();
             GameMethods.updateBombNumber(lstAcText);
 
             GameMethods.updateRodCollisionEvent(acHuman.getAcPod(), acHuman.getAcBomb(), lstAcRod, lstAcText, boomButton);

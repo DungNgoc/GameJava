@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class GameMethods {
 
-    public static void createPlayScreenActorText(Stage stage, ArrayList<ActorRod> lstAcRod, ArrayList<ActorMouse> lsAcMouse,HashMap<ActorText.TextTag, ActorText> lstAcText){
+    public static void createPlayScreenActorText(Stage stage, ArrayList<ActorRod> lstAcRod, ArrayList<ActorMouse> lsAcMouse, HashMap<ActorText.TextTag, ActorText> lstAcText){
         lstAcText.put(ActorText.TextTag.TIMER, new ActorText(ActorText.TextTag.TIMER));
         lstAcText.put(ActorText.TextTag.TARGET, new ActorText(ActorText.TextTag.TARGET));
         lstAcText.put(ActorText.TextTag.MONEY, new ActorText(ActorText.TextTag.MONEY));
@@ -47,7 +47,7 @@ public class GameMethods {
 
     public static void updateSoundTargetSuccess(HashMap<ActorText.TextTag, ActorText> lstAcText){
         if(PlayerInfo.getCurrentMoney() >= PlayerInfo.getCurrentTarget()){
-           // lstAcText.get(ActorText.TextTag.TARGET).getSoundText().playSound();
+            lstAcText.get(ActorText.TextTag.TARGET);
         }
     }
 
@@ -78,21 +78,21 @@ public class GameMethods {
     }
 
     public static void pauseTimerSound(HashMap<ActorText.TextTag,ActorText> lstAcText){
-      //  lstAcText.get(ActorText.TextTag.TIMER).getSoundText().pausePlay();
+        lstAcText.get(ActorText.TextTag.TIMER);
     }
     public static void resumeTimerSound(HashMap<ActorText.TextTag,ActorText> lstAcText){
-       // lstAcText.get(ActorText.TextTag.TIMER).getSoundText().resumePlay();
+        lstAcText.get(ActorText.TextTag.TIMER);
     }
 
     public static boolean checkTimePlay(HashMap<ActorText.TextTag,ActorText> lstAcText, long startTime){
         long timeTemp = countTimePlay(startTime);
         updateTalkingShow(lstAcText);
         if (timeTemp < 0){
-           // lstAcText.get(ActorText.TextTag.TIMER).getSoundText().stopPlay();
+            lstAcText.get(ActorText.TextTag.TIMER);
             return false;
         }
         if(timeTemp == 10){
-          //  lstAcText.get(ActorText.TextTag.TIMER).getSoundText().playSoundLoopOnAndroid();
+            lstAcText.get(ActorText.TextTag.TIMER);
         }
         if(timeTemp < 10){
 
@@ -199,12 +199,12 @@ public class GameMethods {
 
     public static void goWinOrLoseScreen(AbstractScreen currentScreen, GameScreenManager gsm){
         if(PlayerInfo.getCurrentMoney() >= PlayerInfo.getCurrentTarget()){
-            if(PlayerInfo.getCurrentLevel()== 10)
-                gsm.setScreen(ScreenConstants.WIN_SCREEN);
-            else{
-                PlayerInfo.setCurrentLevel(PlayerInfo.getCurrentLevel() + 1);
-                gsm.setScreen(ScreenConstants.SHOP_SCREEN);
-            }
+           if(PlayerInfo.getCurrentLevel()== 10)
+               gsm.setScreen(ScreenConstants.WIN_SCREEN);
+           else{
+               PlayerInfo.setCurrentLevel(PlayerInfo.getCurrentLevel() + 1);
+               gsm.setScreen(ScreenConstants.SHOP_SCREEN);
+           }
             //
 
         }
@@ -253,9 +253,9 @@ public class GameMethods {
         }
     }
     public static boolean isCatchedBoom(ArrayList<ActorRod> lstAcRod, ActorRod rodTNTBox){
-        for(ActorRod rod :lstAcRod){
-            //   if(rodTNTBox.)
-        }
+       for(ActorRod rod :lstAcRod){
+       //   if(rodTNTBox.)
+       }
         return  false;
     }
 

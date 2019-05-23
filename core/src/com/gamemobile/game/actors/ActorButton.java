@@ -7,27 +7,36 @@ import com.gamemobile.game.Application;
 import com.gamemobile.game.animations.AnimationCustom;
 import com.gamemobile.game.utils.ScreenConstants;
 
+
 public class ActorButton extends Actor {
+
     public enum ButtonTag{
+        SHOOT,
+        BOOM,
+        SETTING,
+        TARGET_PLAY,
         MAINMENU_PLAY,
         HOW_TO_PLAY,
         EXIT,
         YES, NO,
         SETTING_MAINMENU,
         SETTING_RESUME,
-        ITEM,
-        TARGET_PLAY,
+        WIN_GOTO_SHOP,
         TIMEOUT_CHANGE_SCREEN,
-        SHOOT,
-        BOOM,
-        SETTING
+        LOSE_BACK_MAINMENU,
+        SHOP_GOTO_NEXT_LEVEL,
+        SHOP_BACK_MAINMENU,
+        FINISH_BACK_MENU,
+        ITEM
     }
+
     public enum ButtonState{
         FREEZE,
         ENABLED,
         HIDE,
         DISABLED
     }
+
     /**
      * Animation.
      */
@@ -88,9 +97,52 @@ public class ActorButton extends Actor {
     }
 
 
-    private void createButtonDisplay() {
-        if (buttonTag.equals(ButtonTag.MAINMENU_PLAY)) {
-            buttonAnimation = new AnimationCustom("animations/buttons/menuplay/menuplaybutton.atlas", 20f, getX(), getY(), getWidth(), getHeight());
+    private void createButtonDisplay(){
+        if(buttonTag.equals(ButtonTag.SHOOT)){
+            buttonAnimation = new AnimationCustom("animations/buttons/shoot/shootbutton.atlas", 20f, getX(), getY(), getWidth(), getHeight());
+
+        }
+        if(buttonTag.equals(ButtonTag.BOOM)){
+            buttonAnimation = new AnimationCustom("animations/buttons/boom/cancelbutton.atlas", 20f, getX(), getY(), getWidth(), getHeight());
+
+            buttonState = ButtonState.DISABLED;
+        }
+        if(buttonTag.equals(ButtonTag.TARGET_PLAY)){
+            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+            buttonState = ButtonState.DISABLED;
+        }
+        if(buttonTag.equals(ButtonTag.MAINMENU_PLAY)){
+            buttonAnimation = new AnimationCustom("animations/buttons/menuplay/menuplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        }
+        if(buttonTag.equals(ButtonTag.SETTING)){
+            buttonAnimation = new AnimationCustom("animations/buttons/setting/settingbutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        }
+        if(buttonTag.equals(ButtonTag.SETTING_MAINMENU)){
+            buttonAnimation = new AnimationCustom("animations/buttons/backmainmenu/backmainmenu.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+            buttonState = ButtonState.DISABLED;
+        }
+        if(buttonTag.equals(ButtonTag.SETTING_RESUME)){
+            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+            buttonState = ButtonState.DISABLED;
+        }
+        if(buttonTag.equals(ButtonTag.WIN_GOTO_SHOP)){
+            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        }
+        if(buttonTag.equals(ButtonTag.TIMEOUT_CHANGE_SCREEN)){
+            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+            buttonState = ButtonState.DISABLED;
+        }
+        if(buttonTag.equals(ButtonTag.LOSE_BACK_MAINMENU)){
+            buttonAnimation = new AnimationCustom("animations/buttons/backmainmenu/backmainmenu.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        }
+        if(buttonTag.equals(ButtonTag.SHOP_BACK_MAINMENU)){
+            buttonAnimation = new AnimationCustom("animations/buttons/backmainmenu/backmainmenu.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        }
+        if(buttonTag.equals(ButtonTag.SHOP_GOTO_NEXT_LEVEL)){
+            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        }
+        if(buttonTag.equals(ButtonTag.FINISH_BACK_MENU)){
+            buttonAnimation = new AnimationCustom("animations/buttons/backmainmenu/backmainmenu.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
         }
         if(buttonTag.equals(ButtonTag.HOW_TO_PLAY)){
             buttonAnimation = new AnimationCustom("animations/buttons/howtoplay/howtoplay.atlas", 20f, getX(), getY(), getWidth(), getHeight());
@@ -104,30 +156,47 @@ public class ActorButton extends Actor {
         if(buttonTag.equals(ButtonTag.NO)){
             buttonAnimation = new AnimationCustom("animations/buttons/no/nobutton.atlas", 20f, getX(), getY(), getWidth(),getHeight());
         }
-        if(buttonTag.equals(ButtonTag.TARGET_PLAY)){
-            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
-            buttonState = ButtonState.DISABLED;
-        }
-        if(buttonTag.equals(ButtonTag.TIMEOUT_CHANGE_SCREEN)){
-            buttonAnimation = new AnimationCustom("animations/buttons/targetplay/targetplaybutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
-            buttonState = ButtonState.DISABLED;
-        }
-        if(buttonTag.equals(ButtonTag.SHOOT)){
-            buttonAnimation = new AnimationCustom("animations/buttons/shoot/shootbutton.atlas", 20f, getX(), getY(), getWidth(), getHeight());
+    }
 
+    private void setButtonPosition(float width, float height){
+        if(buttonTag.equals(ButtonTag.SHOOT)){
+            setPosition(Application.DESKTOP_WIDTH - width - 2, 0);
         }
         if(buttonTag.equals(ButtonTag.BOOM)){
-            buttonAnimation = new AnimationCustom("animations/buttons/boom/cancelbutton.atlas", 20f, getX(), getY(), getWidth(), getHeight());
-
-            buttonState = ButtonState.DISABLED;
+            setPosition(Application.DESKTOP_WIDTH - width - 2, 0);
         }
-        if(buttonTag.equals(ButtonTag.SETTING)){
-            buttonAnimation = new AnimationCustom("animations/buttons/setting/settingbutton.atlas", 20f,  getX(), getY(), getWidth(), getHeight());
+        if(buttonTag.equals(ButtonTag.TARGET_PLAY)){
+            setPosition(Application.DESKTOP_WIDTH/2 - width/2, 0);
         }
-    }
-    private void setButtonPosition(float width, float height){
         if(buttonTag.equals(ButtonTag.MAINMENU_PLAY)){
             setPosition(209f, 270f);
+        }
+        if(buttonTag.equals(ButtonTag.SETTING_MAINMENU)){
+            setPosition(Application.DESKTOP_WIDTH/2 - 2*width - 10f, Application.DESKTOP_HEIGHT/2 - height/2);
+        }
+        if(buttonTag.equals(ButtonTag.SETTING_RESUME)){
+            setPosition(Application.DESKTOP_WIDTH/2 + width + 10f, Application.DESKTOP_HEIGHT/2 - height/2);
+        }
+        if(buttonTag.equals(ButtonTag.SETTING)){
+            setPosition(110f, Application.DESKTOP_HEIGHT - height - 10f);
+        }
+        if(buttonTag.equals(ButtonTag.WIN_GOTO_SHOP)){
+            setPosition(Application.DESKTOP_WIDTH - width - width/3, 0);
+        }
+        if(buttonTag.equals(ButtonTag.TIMEOUT_CHANGE_SCREEN)){
+            setPosition(Application.DESKTOP_WIDTH/2 - width/2, 40f);
+        }
+        if(buttonTag.equals(ButtonTag.LOSE_BACK_MAINMENU)){
+            setPosition(Application.DESKTOP_WIDTH/2 - width/2, 40f);
+        }
+        if(buttonTag.equals(ButtonTag.SHOP_BACK_MAINMENU)){
+            setPosition(15f, Application.DESKTOP_HEIGHT - height - 15f);
+        }
+        if(buttonTag.equals(ButtonTag.SHOP_GOTO_NEXT_LEVEL)){
+            setPosition(Application.DESKTOP_WIDTH - width - 15f, Application.DESKTOP_HEIGHT - height - 15f);
+        }
+        if(buttonTag.equals(ButtonTag.FINISH_BACK_MENU)){
+            setPosition(Application.DESKTOP_WIDTH - width - 2, 0);
         }
         if(buttonTag.equals(ButtonTag.HOW_TO_PLAY)){
             setPosition(730f, 415f);
@@ -141,22 +210,8 @@ public class ActorButton extends Actor {
         if(buttonTag.equals(ButtonTag.NO)){
             setPosition(Application.DESKTOP_WIDTH/2 +110f + 20f, 300f);
         }
-        if(buttonTag.equals(ButtonTag.TARGET_PLAY)){
-            setPosition(Application.DESKTOP_WIDTH/2 - width/2, 0);
-        }
-        if(buttonTag.equals(ButtonTag.TIMEOUT_CHANGE_SCREEN)){
-            setPosition(Application.DESKTOP_WIDTH/2 - width/2, 40f);
-        }
-        if(buttonTag.equals(ButtonTag.SHOOT)){
-            setPosition(Application.DESKTOP_WIDTH - width - 2, 0);
-        }
-        if(buttonTag.equals(ButtonTag.BOOM)){
-            setPosition(Application.DESKTOP_WIDTH - width - 2, 0);
-        }
-        if(buttonTag.equals(ButtonTag.SETTING)){
-            setPosition(110f, Application.DESKTOP_HEIGHT - height - 10f);
-        }
     }
+
     public void  updateButtonTouched(){
 
         if (!Gdx.input.justTouched()) {
@@ -215,4 +270,3 @@ public class ActorButton extends Actor {
         }
     }
 }
-

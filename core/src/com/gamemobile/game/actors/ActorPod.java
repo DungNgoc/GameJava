@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.gamemobile.game.Application;
+
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
 
@@ -60,7 +61,7 @@ public class ActorPod extends Actor {
 
     /**
      * Sound of pod action.
-     */
+
 
     /**
      * Constructor.
@@ -106,9 +107,6 @@ public class ActorPod extends Actor {
         currPoint[1] = getY();
 
         //sound setting.
-
-//        shootSound.playSoundLoopOnAndroid();
-//        shootSound.pausePlay();
 
 //        rewindSound.playSoundLoopOnAndroid();
 //        rewindSound.pausePlay();
@@ -223,13 +221,23 @@ public class ActorPod extends Actor {
             }
 
 
-//            shootSound.pausePlay();
 //            rewindSound.resumePlay();
             rewindPod();
         }
     }
 
+    public void muteAllSound(){
 
+    }
+
+    public void unmuteAllSound(){
+        if(podState.equals(PodState.SHOOT)){
+
+        }
+        if(podState.equals(PodState.REWIND)){
+
+        }
+    }
 
     /**
      * check Pod Edge to rewind.
@@ -301,8 +309,7 @@ public class ActorPod extends Actor {
     public boolean remove() {
         claw.dispose();
         rope.dispose();
-        //shootSound.dispose();
-        //rewindSound.dispose();
+
         return super.remove();
     }
 
