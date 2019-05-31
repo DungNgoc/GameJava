@@ -1,7 +1,7 @@
 package com.gamemobile.game.utils;
 
 import com.gamemobile.game.actors.ActorItem;
-
+import com.gamemobile.game.sounds.SoundEffect;
 
 
 public class ShopConstants {
@@ -23,7 +23,7 @@ public class ShopConstants {
     public static void resetListItem(){
         for (int i = 0; i < LIST_ITEMS.length; i++){
             LIST_ITEMS[i].setEnable(true);
-
+            LIST_ITEMS[i].getSoundBuy().setSoundKind(SoundEffect.SoundKind.ONE_TIME);
         }
     }
 

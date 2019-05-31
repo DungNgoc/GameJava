@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.animations.AnimationCustom;
-
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.TextConstants;
@@ -31,10 +31,11 @@ public class ActorMouse extends Actor {
     private RodState rodState;
     private float moveSpeedRod;
    // private Texture textureRod;
-
+    private SoundEffect rodSound;
     private AnimationCustom rodExplosionAnimation;
     private float[] explosionPos;
-
+    private SoundEffect explosionSound;
+    private SoundEffect eatBonusSound;
 
 
     private float moveSpeed;
@@ -84,6 +85,9 @@ public class ActorMouse extends Actor {
 
         rodExplosionAnimation = new AnimationCustom("animations/explosions/rodexplosion.atlas", 6, x, y, width, height);
         explosionPos = new float[4];
+        explosionSound = new SoundEffect("sounds/explode.ogg");
+
+        eatBonusSound = new SoundEffect("sounds/eatbonus.ogg");
 
 
     }
@@ -203,21 +207,21 @@ public class ActorMouse extends Actor {
             weight = 1.7f *ScreenConstants.TRANSFORM_Y;
 
 
-
+            rodSound = new SoundEffect("sounds/rock.ogg");
             return;
         }
         if(tag.equals(RodTag.MOUSERUNNING2)){
             money = 602;
             weight = 1.7f * ScreenConstants.TRANSFORM_Y;
             //mouse = new AnimationCustom("animations/mouses/mouse2/mouserunningleft", 3f, 150f, 40f, 12f, 24f);
-
+            rodSound = new SoundEffect("sounds/bigmoney.ogg");
             return;
         }
         if(tag.equals(RodTag.MOUSERUNNING3)){
             money = 802;
             weight = 1.7f * ScreenConstants.TRANSFORM_Y;
             //mouse = new AnimationCustom("animations/mouses/mouse2/mouserunningleft", 3f, 150f, 40f, 12f, 24f);
-
+            rodSound = new SoundEffect("sounds/bigmoney.ogg");
             return;
         }
 
@@ -234,7 +238,7 @@ public class ActorMouse extends Actor {
 
     public void updateCollisionWithPod(ActorPod pod, ActorText talkingText) {
 
-
+        eatBonusSound.playSound();
         if(rodState.equals(ActorMouse.RodState.DISABLED)){
             return;
         }
@@ -250,14 +254,15 @@ public class ActorMouse extends Actor {
                 pod.setPodState(ActorPod.PodState.REWIND);
                 setMoveSpeed(pod.getMoveSpeed());
                 rodState = ActorMouse.RodState.CATCHED;
-
+                rodSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+                rodSound.playSound();
                 return;
             }
 
 
         }
         if(rodState.equals(ActorMouse.RodState.CATCHED) && pod.getPodState().equals(ActorPod.PodState.ROTATION)){
-
+            eatBonusSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
             PlayerInfo.setCurrentMoney(PlayerInfo.getCurrentMoney() + money);
 
             talkingText.setText("Oh yeah!$" + money + "...");
@@ -275,7 +280,8 @@ public class ActorMouse extends Actor {
         acBomb.updateCollisionWithPod(acPod);
         if(rodState.equals(ActorMouse.RodState.CATCHED) && acBomb.getBombState().equals(ActorBomb.BombState.BURST)){
             rodState = ActorMouse.RodState.EXPLODED;
-
+            explosionSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+            explosionSound.playSound();
             acPod.setMoveSpeed(40);
             synchronizeExplosionWithRod(acPod);
             acBomb.setBombState(ActorBomb.BombState.FREEZE);
@@ -383,10 +389,10 @@ public class ActorMouse extends Actor {
 
     @Override
     public boolean remove() {
-
+        rodSound.dispose();
         rodExplosionAnimation.dispose();
 //        textureRod.dispose();
-
+        explosionSound.dispose();
         return super.remove();
     }
 

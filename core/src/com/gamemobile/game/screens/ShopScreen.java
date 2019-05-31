@@ -6,7 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
-
+import com.gamemobile.game.sounds.MusicEffect;
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.GameMethods;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
@@ -18,7 +19,8 @@ import com.gamemobile.game.utils.TextNoBackground;
 public class ShopScreen extends AbstractScreen{
 
     private Texture background;
-
+    private MusicEffect shopMusic;
+    private SoundEffect closeDoorSound;
     private ActorButton btnGoNextLevel;
     private ActorButton btnBackMainMenu;
     private boolean isFinishScreen;
@@ -50,7 +52,12 @@ public class ShopScreen extends AbstractScreen{
         nextScreen = 0;
         startTime = TimeUtils.millis()/1000;
 
+        shopMusic = new MusicEffect("sounds/shopmusic.ogg");
+        shopMusic.setMusicKind(MusicEffect.MusicKind.DURING);
+        shopMusic.playMusicLoopOnAndroid();
 
+        closeDoorSound = new SoundEffect("sounds/closedoor.ogg");
+        closeDoorSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
 
         btnGoNextLevel = new ActorButton(120f, 120f, ActorButton.ButtonTag.SHOP_GOTO_NEXT_LEVEL);
         btnBackMainMenu = new ActorButton(120f, 120f, ActorButton.ButtonTag.SHOP_BACK_MAINMENU);
@@ -87,7 +94,8 @@ public class ShopScreen extends AbstractScreen{
         }
         else {
             SplashDoors.closeTheSplashDoor(10f);
-
+            shopMusic.stopPlay();
+            closeDoorSound.playSound();
             if(SplashDoors.checkDoorClose() && TimeUtils.millis()/1000 - startTime >= 2){
                 app.gsm.setScreen(nextScreen);
                 dispose();
@@ -122,12 +130,12 @@ public class ShopScreen extends AbstractScreen{
 
     @Override
     public void pause() {
-
+        shopMusic.pausePlay();
     }
 
     @Override
     public void resume() {
-
+        shopMusic.resumePlay();
     }
 
     @Override
@@ -141,7 +149,8 @@ public class ShopScreen extends AbstractScreen{
         background.dispose();
         btnGoNextLevel.remove();
         btnBackMainMenu.remove();
-
+        shopMusic.dispose();
+        closeDoorSound.dispose();
         currentMoneyBack.dispose();
         currMoneyText.dispose();
         super.dispose();

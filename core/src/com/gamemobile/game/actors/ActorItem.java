@@ -3,7 +3,7 @@ package com.gamemobile.game.actors;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ShopConstants;
 import com.gamemobile.game.utils.TextNoBackground;
@@ -29,7 +29,7 @@ public class ActorItem extends Actor {
 
     private boolean isEnable;
 
-
+    private SoundEffect soundBuy;
 
     public ActorItem(String path, int money, float x, float y, float width, float height, ItemTag itemTag){
         btnItem = new ActorButton(path, x, y, width, height);
@@ -37,11 +37,14 @@ public class ActorItem extends Actor {
         this.money = money;
         isBought = false;
         this.isEnable = true;
-
+        soundBuy = new SoundEffect("sounds/sell.ogg");
+        soundBuy.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
         this.itemTag = itemTag;
     }
 
-
+    public SoundEffect getSoundBuy() {
+        return soundBuy;
+    }
 
     public ItemTag getItemTag() {
         return itemTag;
@@ -86,7 +89,7 @@ public class ActorItem extends Actor {
     @Override
     public boolean remove() {
         btnItem.remove();
-
+        soundBuy.dispose();
         moneyText.dispose();
         return super.remove();
     }
@@ -99,7 +102,7 @@ public class ActorItem extends Actor {
             if(btnItem.isTouched()){
                 isEnable = false;
                 isBought = true;
-
+                soundBuy.playSound();
                 PlayerInfo.setCurrentMoney(PlayerInfo.getCurrentMoney() - money);
                 updatePlayerBag();
             }

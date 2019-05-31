@@ -5,19 +5,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
-
+import com.gamemobile.game.sounds.MusicEffect;
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.SplashDoors;
 
 
-public class LoseScreen extends AbstractScreen {
+public class LoseScreen extends AbstractScreen{
 
     private Texture background;
-
+    private MusicEffect loseSound;
     private ActorButton btnBackMenu;
     private boolean isScreenFinish;
     private long startTime;
-
+    private SoundEffect finishSound;
 
 
     public LoseScreen(Application app) {
@@ -39,7 +40,12 @@ public class LoseScreen extends AbstractScreen {
         background = new Texture("images/backgrounds/losebackground.png");
         isScreenFinish = false;
 
+        loseSound = new MusicEffect("sounds/youlose.ogg");
+        loseSound.setMusicKind(MusicEffect.MusicKind.ONE_TIME);
+        loseSound.playMusic();
 
+        finishSound = new SoundEffect("sounds/closedoor.ogg");
+        finishSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
 
         btnBackMenu = new ActorButton(120f, 120f, ActorButton.ButtonTag.LOSE_BACK_MAINMENU);
 
@@ -68,7 +74,7 @@ public class LoseScreen extends AbstractScreen {
         }
         if(isScreenFinish){
             SplashDoors.closeTheSplashDoor(10f);
-
+            finishSound.playSound();
             if(TimeUtils.millis()/1000 - startTime >= 2) {
                 app.gsm.setScreen(ScreenConstants.MAINMENU_SCREEN);
                 dispose();
@@ -87,10 +93,12 @@ public class LoseScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-            }
+        loseSound.pausePlay();
+    }
 
     @Override
-    public void resume(){
+    public void resume() {
+        loseSound.resumePlay();
     }
 
     @Override
@@ -102,7 +110,8 @@ public class LoseScreen extends AbstractScreen {
     public void dispose() {
         background.dispose();
         btnBackMenu.remove();
-
+        loseSound.dispose();
+        finishSound.dispose();
         super.dispose();
     }
 }

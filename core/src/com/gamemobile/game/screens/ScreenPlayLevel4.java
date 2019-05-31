@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ScreenPlayLevel4 extends AbstractScreen {
+public class ScreenPlayLevel4 extends AbstractScreen{
 
     private ActorHuman acHuman;
     private ArrayList<ActorRod> lstAcRod;

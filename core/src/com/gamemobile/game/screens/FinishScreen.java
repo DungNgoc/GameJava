@@ -8,7 +8,7 @@ import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
 import com.gamemobile.game.actors.ActorImage;
 import com.gamemobile.game.actors.ActorRollingImage;
-
+import com.gamemobile.game.sounds.MusicEffect;
 import com.gamemobile.game.utils.GameMethods;
 import com.gamemobile.game.utils.SplashDoors;
 import com.gamemobile.game.utils.TextNoBackground;
@@ -22,7 +22,7 @@ public class FinishScreen extends AbstractScreen {
     private ActorImage acTheEndText;
     private ArrayList<ActorImage> lstCD;
     private ActorRollingImage soundTrack;
-
+    private MusicEffect finishMusic;
     private TextNoBackground thankText;
     private boolean isFinishScreen;
     private long startTime;
@@ -57,7 +57,9 @@ public class FinishScreen extends AbstractScreen {
         soundTrack = new ActorRollingImage("images/textureobjects/soundtrack.png", 0.7f, 120f, 50f);
         soundTrack.startRolling();
 
-
+        finishMusic = new MusicEffect("sounds/dustandlight.ogg");
+        finishMusic.setMusicKind(MusicEffect.MusicKind.DURING);
+        finishMusic.playMusicLoopOnAndroid();
 
         lstCD = new ArrayList<ActorImage>();
         lstCD.add(new ActorImage("images/textureobjects/cd1.png", 30f, 200f, 100f, 100f));
@@ -131,12 +133,12 @@ public class FinishScreen extends AbstractScreen {
 
     @Override
     public void pause() {
-
+        finishMusic.pausePlay();
     }
 
     @Override
     public void resume() {
-
+        finishMusic.resumePlay();
     }
 
     @Override
@@ -149,7 +151,7 @@ public class FinishScreen extends AbstractScreen {
         background.dispose();
         acTheEndText.remove();
         soundTrack.remove();
-
+        finishMusic.dispose();
         for(ActorImage acImg : lstCD){
             if(acImg != null){
                 acImg.remove();

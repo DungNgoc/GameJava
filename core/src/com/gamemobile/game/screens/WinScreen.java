@@ -6,7 +6,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
 import com.gamemobile.game.actors.ActorImage;
-
+import com.gamemobile.game.sounds.MusicEffect;
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.SplashDoors;
 
@@ -15,7 +16,8 @@ public class WinScreen extends AbstractScreen {
 
     private ScreenState screenState;
     private Texture background;
-
+    private SoundEffect soundCloseDoor;
+    private MusicEffect musicThugsLife;
     private long startTime;
     private long[] pauseTempTime;
     private boolean isEffect;
@@ -50,7 +52,12 @@ public class WinScreen extends AbstractScreen {
         isMove = true;
         isHumanThugslife = false;
 
+        soundCloseDoor = new SoundEffect("sounds/closedoor.ogg");
+        soundCloseDoor.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
 
+        musicThugsLife = new MusicEffect("sounds/thugslife.ogg");
+        musicThugsLife.setMusicKind(MusicEffect.MusicKind.DURING);
+        musicThugsLife.playMusicLoopOnAndroid();
 
         startTime = TimeUtils.millis();
         pauseTempTime = new long[2];
@@ -102,7 +109,8 @@ public class WinScreen extends AbstractScreen {
 
         if(screenState.equals(ScreenState.FINISH)){
             SplashDoors.closeTheSplashDoor(10f);
-
+            musicThugsLife.stopPlay();
+            soundCloseDoor.playSound();
             if(SplashDoors.checkDoorClose() && TimeUtils.millis() - startTime >= 2000){
                 /*if(PlayerInfo.getCurrentLevel() > ScreenConstants.PLAY_LEVEL_SCREEN.length){
                     app.gsm.setScreen(ScreenConstants.FINISH_SCREEN);
@@ -195,14 +203,14 @@ public class WinScreen extends AbstractScreen {
     @Override
     public void pause() {
         screenState = ScreenState.PAUSE;
-
+        musicThugsLife.pausePlay();
         pauseTempTime[0] = TimeUtils.millis();
     }
 
     @Override
     public void resume() {
         screenState = ScreenState.PLAY;
-
+        musicThugsLife.resumePlay();
     }
 
     @Override
@@ -217,7 +225,8 @@ public class WinScreen extends AbstractScreen {
         acGlasses.remove();
         acHuman.remove();
         background.dispose();
-
+        musicThugsLife.dispose();
+        soundCloseDoor.dispose();
         super.dispose();
     }
 }

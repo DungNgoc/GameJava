@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.animations.AnimationCustom;
-
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.TextConstants;
@@ -44,10 +44,11 @@ public class ActorRod extends Actor {
     private RodState rodState;
     private float moveSpeed;
     private Texture textureRod;
-
+    private SoundEffect rodSound;
     private AnimationCustom rodExplosionAnimation;
     private float[] explosionPos;
-
+    private SoundEffect explosionSound;
+    private SoundEffect eatBonusSound;
     public boolean ischeckboom;// check collision between tnt bound and object bound
     public float pos;
 
@@ -76,7 +77,9 @@ public class ActorRod extends Actor {
 
         rodExplosionAnimation = new AnimationCustom("animations/explosions/rodexplosion.atlas", 6, x, y, width, height);
         explosionPos = new float[4];
+        explosionSound = new SoundEffect("sounds/explode.ogg");
 
+        eatBonusSound = new SoundEffect("sounds/eatbonus.ogg");
     }
 
     public RodState getRodState() {
@@ -109,63 +112,63 @@ public class ActorRod extends Actor {
             weight = 2.7f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/gold500.png");
 
-
+            rodSound = new SoundEffect("sounds/bigmoney.ogg");
             return;
         }
         if(tag.equals(RodTag.GOLD_250)){
             money = 250;
             weight = 2.5f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/gold250.png");
-
+            rodSound = new SoundEffect("sounds/bigmoney.ogg");
             return;
         }
         if(tag.equals(RodTag.GOLD_100)){
             money = 100;
             weight = 1.5f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/gold100.png");
-
+            rodSound = new SoundEffect("sounds/gold.ogg");
             return;
         }
         if(tag.equals(RodTag.GOLD_50)){
             money = 50;
             weight = 1f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/gold50.png");
-
+            rodSound = new SoundEffect("sounds/gold.ogg");
             return;
         }
         if(tag.equals(RodTag.DINAMOND_650)){
             money = 600;
             weight = 1f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/dinamond.png");
-
+            rodSound = new SoundEffect("sounds/bigmoney.ogg");
             return;
         }
         if(tag.equals(RodTag.ROCK_20)){
             money = 20;
             weight = 2.7f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/rock20.png");
-
+            rodSound = new SoundEffect("sounds/rock.ogg");
             return;
         }
         if(tag.equals(RodTag.ROCK_10)){
             money = 10;
             weight = 1.5f * ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture("images/textureobjects/rock10.png");
-
+            rodSound = new SoundEffect("sounds/rock.ogg");
             return;
         }
         if(tag.equals(RodTag.DOGBONE_5)){
             money = 5;
             weight = 1.7f *ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture(("images/textureobjects/bonedog.png"));
-
+            rodSound = new SoundEffect("sounds/rock.ogg");
 
         }
         if(tag.equals(RodTag.SKULL_3)){
             money = 3;
             weight = 1.5f *ScreenConstants.TRANSFORM_Y;
             textureRod = new Texture(("images/textureobjects/skull.png"));
-
+            rodSound = new SoundEffect("sounds/rock.ogg");
 
         }
         if(tag.equals(RodTag.QUESTIONBAGTYPE1)){
@@ -175,12 +178,12 @@ public class ActorRod extends Actor {
             this.weight = 1.5F * ScreenConstants.TRANSFORM_Y;
             this.textureRod = new Texture("images/textureobjects/questionbag.png");
             if (this.money < 50) {
-
+                this.rodSound = new SoundEffect("sounds/rock.ogg");
             } else if(this.money >=350 && this.money < 400){
                 this.money = 0;
-
-            } else;
-
+                this.rodSound = new SoundEffect("sounds/bigmoney.ogg");
+            } else
+                this.rodSound = new SoundEffect("sounds/bigmoney.ogg");
            // this.money = 0;
 
         }
@@ -188,7 +191,7 @@ public class ActorRod extends Actor {
             money = 1;
             this.weight = 1f *ScreenConstants.TRANSFORM_Y;
             this.textureRod = new Texture(("images/textureobjects/tntbox.png"));
-
+            this.rodSound = new SoundEffect("sounds/explode.ogg");
             setPosition(getX(), getY());
             setScaleNumBoom();
         }
@@ -196,7 +199,7 @@ public class ActorRod extends Actor {
             money = 1;
             this.weight = 1f *ScreenConstants.TRANSFORM_Y;
             this.textureRod = new Texture(("images/textureobjects/boxbreak.png"));
-
+            this.rodSound = new SoundEffect("sounds/explode.ogg");
 
             //setScaleNumBoom();
           //  setScaleNumBoom();
@@ -212,7 +215,7 @@ public class ActorRod extends Actor {
 
     public void updateCollisionWithPod(ActorPod pod, ActorText talkingText) {
 
-
+        eatBonusSound.playSound();
         if(rodState.equals(RodState.DISABLED)){
             return;
         }
@@ -229,7 +232,8 @@ public class ActorRod extends Actor {
                 setMoveSpeed(pod.getMoveSpeed());
                 if(this.tag.equals(RodTag.TNTBOX)){
                     rodState = RodState.EXPLODED;
-
+                    explosionSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+                    explosionSound.playSound();
                     //talkingText.setText("YOU GOT A BOOM");
                     pod.setMoveSpeed(30);
 
@@ -246,7 +250,8 @@ public class ActorRod extends Actor {
                 }
                 else{
                 rodState = RodState.CATCHED;
-
+                rodSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+                rodSound.playSound();
                 return;}
             }
 
@@ -255,7 +260,7 @@ public class ActorRod extends Actor {
 
         }
         if(rodState.equals(RodState.CATCHED) && pod.getPodState().equals(ActorPod.PodState.ROTATION)){
-
+            eatBonusSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
             PlayerInfo.setCurrentMoney(PlayerInfo.getCurrentMoney() + money);
 
 
@@ -283,7 +288,8 @@ public class ActorRod extends Actor {
         acBomb.updateCollisionWithPod(acPod);
         if(rodState.equals(RodState.CATCHED) && acBomb.getBombState().equals(ActorBomb.BombState.BURST)){
             rodState = RodState.EXPLODED;
-
+            explosionSound.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+            explosionSound.playSound();
             acPod.setMoveSpeed(40);
             synchronizeExplosionWithRod(acPod);
             acBomb.setBombState(ActorBomb.BombState.FREEZE);
@@ -436,10 +442,10 @@ public class ActorRod extends Actor {
 
     @Override
     public boolean remove() {
-
+        rodSound.dispose();
         rodExplosionAnimation.dispose();
         textureRod.dispose();
-
+        explosionSound.dispose();
         return super.remove();
     }
 

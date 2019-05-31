@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
-
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.SplashDoors;
 import com.gamemobile.game.utils.TextNoBackground;
 
@@ -17,7 +17,8 @@ public class TimeOutDisplay extends Actor {
     private Texture background;
     private TextNoBackground timeOutText;
     private Texture timeOutSign;
-
+    private SoundEffect soundCloseDoor;
+    private SoundEffect soundTimeOut;
     private long startTime;
     private ActorButton btnChangeScreen;
 
@@ -26,7 +27,10 @@ public class TimeOutDisplay extends Actor {
         timeOutSign = new Texture("images/textureobjects/timeout.png");
         timeOutText = new TextNoBackground(Color.GOLD, 50);
         miniScreenState = MiniScreenState.HIDE;
-
+        soundCloseDoor = new SoundEffect("sounds/closedoor.ogg");
+        soundCloseDoor.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
+        soundTimeOut = new SoundEffect("sounds/timeout.ogg");
+        soundTimeOut.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
         startTime = 0;
         btnChangeScreen = new ActorButton(120f, 120f, ActorButton.ButtonTag.TIMEOUT_CHANGE_SCREEN);
     }
@@ -45,7 +49,7 @@ public class TimeOutDisplay extends Actor {
         background.dispose();
         timeOutText.dispose();
         timeOutSign.dispose();
-
+        soundTimeOut.dispose();
         return super.remove();
     }
 
@@ -53,7 +57,7 @@ public class TimeOutDisplay extends Actor {
     public void act(float delta) {
         super.act(delta);
         if(miniScreenState.equals(MiniScreenState.SHOW)){
-
+            soundTimeOut.playSound();
             btnChangeScreen.updateButtonTouched();
             if(btnChangeScreen.isTouched()){
                 miniScreenState = MiniScreenState.FREEZE;
@@ -61,7 +65,7 @@ public class TimeOutDisplay extends Actor {
             }
         }
         if(miniScreenState.equals(MiniScreenState.FREEZE)){
-
+            soundCloseDoor.playSound();
             SplashDoors.closeTheSplashDoor(10f);
             if(SplashDoors.checkDoorClose() && TimeUtils.millis()/1000 - startTime >= 2){
                 miniScreenState = MiniScreenState.FINISH;

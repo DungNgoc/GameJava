@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class GameMethods {
 
-    public static void createPlayScreenActorText(Stage stage, ArrayList<ActorRod> lstAcRod, ArrayList<ActorMouse> lsAcMouse, HashMap<ActorText.TextTag, ActorText> lstAcText){
+    public static void createPlayScreenActorText(Stage stage, ArrayList<ActorRod> lstAcRod, ArrayList<ActorMouse> lsAcMouse,HashMap<ActorText.TextTag, ActorText> lstAcText){
         lstAcText.put(ActorText.TextTag.TIMER, new ActorText(ActorText.TextTag.TIMER));
         lstAcText.put(ActorText.TextTag.TARGET, new ActorText(ActorText.TextTag.TARGET));
         lstAcText.put(ActorText.TextTag.MONEY, new ActorText(ActorText.TextTag.MONEY));
@@ -47,7 +47,7 @@ public class GameMethods {
 
     public static void updateSoundTargetSuccess(HashMap<ActorText.TextTag, ActorText> lstAcText){
         if(PlayerInfo.getCurrentMoney() >= PlayerInfo.getCurrentTarget()){
-            lstAcText.get(ActorText.TextTag.TARGET);
+            lstAcText.get(ActorText.TextTag.TARGET).getSoundText().playSound();
         }
     }
 
@@ -78,21 +78,21 @@ public class GameMethods {
     }
 
     public static void pauseTimerSound(HashMap<ActorText.TextTag,ActorText> lstAcText){
-        lstAcText.get(ActorText.TextTag.TIMER);
+        lstAcText.get(ActorText.TextTag.TIMER).getSoundText().pausePlay();
     }
     public static void resumeTimerSound(HashMap<ActorText.TextTag,ActorText> lstAcText){
-        lstAcText.get(ActorText.TextTag.TIMER);
+        lstAcText.get(ActorText.TextTag.TIMER).getSoundText().resumePlay();
     }
 
     public static boolean checkTimePlay(HashMap<ActorText.TextTag,ActorText> lstAcText, long startTime){
         long timeTemp = countTimePlay(startTime);
         updateTalkingShow(lstAcText);
         if (timeTemp < 0){
-            lstAcText.get(ActorText.TextTag.TIMER);
+            lstAcText.get(ActorText.TextTag.TIMER).getSoundText().stopPlay();
             return false;
         }
         if(timeTemp == 10){
-            lstAcText.get(ActorText.TextTag.TIMER);
+            lstAcText.get(ActorText.TextTag.TIMER).getSoundText().playSoundLoopOnAndroid();
         }
         if(timeTemp < 10){
 

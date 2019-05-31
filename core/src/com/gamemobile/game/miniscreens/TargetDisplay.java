@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
-
+import com.gamemobile.game.sounds.MusicEffect;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.SplashDoors;
@@ -24,7 +24,7 @@ public class TargetDisplay extends Actor {
     private BoardState boardState;
     private float boardDirectionY;
     private long startTime;
-
+    private MusicEffect soundStartPlay;
     private BitmapFont font;
 
 
@@ -36,7 +36,9 @@ public class TargetDisplay extends Actor {
         boardState = BoardState.MOVE_DOWN;
         boardDirectionY =  Application.DESKTOP_HEIGHT;
         startTime = TimeUtils.millis()/1000;
-
+        soundStartPlay = new MusicEffect("sounds/startplay.ogg");
+        soundStartPlay.setMusicKind(MusicEffect.MusicKind.ONE_TIME);
+        soundStartPlay.playMusic();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/luximb.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 40;
@@ -131,7 +133,7 @@ public class TargetDisplay extends Actor {
         board.dispose();
         btnPlay.remove();
         font.dispose();
-
+        soundStartPlay.dispose();
         return super.remove();
     }
 }

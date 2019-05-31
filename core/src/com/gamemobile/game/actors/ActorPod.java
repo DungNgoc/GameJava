@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.gamemobile.game.Application;
-
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.ScreenConstants;
 
@@ -61,7 +61,9 @@ public class ActorPod extends Actor {
 
     /**
      * Sound of pod action.
-
+     */
+    private SoundEffect shootSound;
+    private SoundEffect rewindSound;
 
     /**
      * Constructor.
@@ -107,7 +109,12 @@ public class ActorPod extends Actor {
         currPoint[1] = getY();
 
         //sound setting.
-
+        shootSound = new SoundEffect("sounds/crank.ogg", 1f);
+        shootSound.setSoundKind(SoundEffect.SoundKind.DURING);
+//        shootSound.playSoundLoopOnAndroid();
+//        shootSound.pausePlay();
+        rewindSound = new SoundEffect("sounds/rewind.ogg", 1f);
+        rewindSound.setSoundKind(SoundEffect.SoundKind.DURING);
 //        rewindSound.playSoundLoopOnAndroid();
 //        rewindSound.pausePlay();
 
@@ -175,7 +182,9 @@ public class ActorPod extends Actor {
         return podState;
     }
 
-
+    public SoundEffect getRewindSound() {
+        return rewindSound;
+    }
 
     /**
      * check action per delta time.
@@ -192,7 +201,12 @@ public class ActorPod extends Actor {
 
         //ROTATION: rotate claw and rope.
         if (podState.equals(PodState.ROTATION)) {
-
+            if(rewindSound.getSoundKind().equals(SoundEffect.SoundKind.DISABLE)) {
+                rewindSound.setSoundKind(SoundEffect.SoundKind.DURING);
+            }
+            if(shootSound.getSoundKind().equals(SoundEffect.SoundKind.DISABLE)){
+                shootSound.setSoundKind(SoundEffect.SoundKind.DURING);
+            }
 //            shootSound.pausePlay();
 //            rewindSound.pausePlay();
             updateRotation();
@@ -202,9 +216,12 @@ public class ActorPod extends Actor {
         if (podState.equals(PodState.SHOOT)) {
             if(checkPodEdge()) {
                 podState = PodState.REWIND;
-
+                rewindSound.setSoundKind(SoundEffect.SoundKind.DURING);
+                shootSound.stopPlay();
+                shootSound.pausePlay();
             }
-
+            shootSound.playSoundLoopOnAndroid();
+            shootSound.resumePlay();
             shootPod();
         }
 
@@ -216,26 +233,33 @@ public class ActorPod extends Actor {
                 resetMoveSpeed();
                 resetPosition();
                 resetAllSprite();
-
+                rewindSound.stopPlay();
+                rewindSound.setSoundKind(SoundEffect.SoundKind.DISABLE);
+                shootSound.setSoundKind(SoundEffect.SoundKind.DISABLE);
                 //rewindSound.pausePlay();
             }
 
-
+            shootSound.stopPlay();
+            rewindSound.playSoundLoopOnAndroid();
+//            shootSound.pausePlay();
 //            rewindSound.resumePlay();
             rewindPod();
         }
     }
 
     public void muteAllSound(){
-
+        shootSound.stopPlay();
+        rewindSound.stopPlay();
     }
 
     public void unmuteAllSound(){
         if(podState.equals(PodState.SHOOT)){
-
+            shootSound.setSoundKind(SoundEffect.SoundKind.DURING);
+            shootSound.playSoundLoopOnAndroid();
         }
         if(podState.equals(PodState.REWIND)){
-
+            rewindSound.setSoundKind(SoundEffect.SoundKind.DURING);
+            rewindSound.playSoundLoopOnAndroid();
         }
     }
 
@@ -309,7 +333,8 @@ public class ActorPod extends Actor {
     public boolean remove() {
         claw.dispose();
         rope.dispose();
-
+        shootSound.dispose();
+        rewindSound.dispose();
         return super.remove();
     }
 

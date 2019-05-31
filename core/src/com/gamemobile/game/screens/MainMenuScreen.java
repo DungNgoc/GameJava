@@ -12,7 +12,8 @@ import com.gamemobile.game.actors.ActorImage;
 import com.gamemobile.game.miniscreens.ExitDisplay;
 import com.gamemobile.game.miniscreens.HowToPlayDisplay;
 import com.gamemobile.game.miniscreens.SettingDisplay;
-
+import com.gamemobile.game.sounds.MusicEffect;
+import com.gamemobile.game.sounds.SoundEffect;
 import com.gamemobile.game.utils.PlayerInfo;
 import com.gamemobile.game.utils.SplashDoors;
 
@@ -22,7 +23,8 @@ public class MainMenuScreen extends AbstractScreen {
     private ActorHuman acHuman;
     private Texture background;
     private ActorButton btnPlayGame;
-
+    private MusicEffect musicMenu;
+    private SoundEffect soundCloseDoor;
     private boolean isCloseDoor;
     private long startTime;
     private ActorImage acHumanImage;
@@ -53,10 +55,14 @@ public class MainMenuScreen extends AbstractScreen {
         background = new Texture("images/backgrounds/mainmenu.png");
         panel = new Texture("images/textureobjects/panel.png");
 
-
+        soundCloseDoor = new SoundEffect("sounds/closedoor.ogg");
+        soundCloseDoor.setSoundKind(SoundEffect.SoundKind.ONE_TIME);
         isCloseDoor = false;
 
 
+        musicMenu = new MusicEffect("sounds/mainmenu_2.ogg");
+        musicMenu.setMusicKind(MusicEffect.MusicKind.DURING);
+        musicMenu.playMusicLoopOnAndroid();
 
 
         btnPlayGame = new ActorButton(211f, 222f, ActorButton.ButtonTag.MAINMENU_PLAY);
@@ -169,7 +175,9 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     private void updateMenuSound(){
-
+        musicMenu.pausePlay();
+        musicMenu.stopPlay();
+        soundCloseDoor.playSound();
     }
     private void makeHumanRun() {
         //acHumanImage.setMoveLeft(0.2F, 400f);
@@ -186,12 +194,13 @@ public class MainMenuScreen extends AbstractScreen {
     }
 
     @Override
-    public void pause(){
+    public void pause() {
+        musicMenu.pausePlay();
     }
 
     @Override
     public void resume() {
-
+        musicMenu.resumePlay();
     }
 
     @Override
@@ -208,7 +217,8 @@ public class MainMenuScreen extends AbstractScreen {
         acHumanImage.remove();
         background.dispose();
         panel.dispose();
-
+        musicMenu.dispose();
+        soundCloseDoor.dispose();
         super.dispose();
     }
 

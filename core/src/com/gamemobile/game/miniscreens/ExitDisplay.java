@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.gamemobile.game.Application;
 import com.gamemobile.game.actors.ActorButton;
-
+import com.gamemobile.game.sounds.MusicEffect;
 import com.gamemobile.game.utils.ScreenConstants;
 import com.gamemobile.game.utils.SplashDoors;
 
@@ -22,7 +22,7 @@ public class ExitDisplay extends  Actor {
     private BoardState boardState;
     private float boardDirectionY;
     private long startTime;
-
+    private MusicEffect soundStartPlay;
     private BitmapFont font;
     private boolean isResume;
     public boolean ischeckbtn;
@@ -146,7 +146,7 @@ public class ExitDisplay extends  Actor {
         board.dispose();
         btnYes.remove();
         btnNo.remove();
-
+        soundStartPlay.dispose();
         return super.remove();
     }
 }
